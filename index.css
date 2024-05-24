@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+.body {
+    background-color: burlywood; /* 背景色の設定 */
+}
+
+.h1 {
+    background-color: #333; /* ヘッダーの背景色 */
+    color: white; /* ヘッダーのテキスト色 */
+    padding: 20px; /* ヘッダーのパディング */
+    text-align: center; /* ヘッダーのテキストを中央揃え */
+    margin-top: 0px; /* ヘッダーの外側のマージンを消す */
+    margin-bottom: 60px;
+}
+
+.custom-button {
+    background-color: #4CAF50; /* 緑色の背景 */
+    border: none; /* 境界線を消す */
+    color: white; /* 白色の文字 */
+    padding: 15px 55px; /* パディング */
+    text-align: center; /* テキストを中央揃え */
+    text-decoration: none; /* テキストの下線を消す */
+    display: inline-block; /* インラインブロック表示 */
+    font-size: 16px; /* フォントサイズ */
+    margin: 60px 2px; /* マージン */
+    cursor: pointer; /* ポインタにカーソルを変更 */
+    border-radius: 8px; /* 角を丸くする */
+}
+.custom-button:hover {
+    background-color: #45a049; /* ホバー時の背景色 */
+}
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.file-input-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-input-label {
+    background-color: #4CAF50; /* ラベルの背景色 */
+    border: none; /* 境界線を消す */
+    color: white; /* 白色の文字 */
+    padding: 15px 32px; /* パディング */
+    text-align: center; /* テキストを中央揃え */
+    text-decoration: none; /* テキストの下線を消す */
+    display: inline-block; /* インラインブロック表示 */
+    font-size: 16px; /* フォントサイズ */
+    cursor: pointer; /* ポインタにカーソルを変更 */
+    border-radius: 8px; /* 角を丸くする */
+}
+
+.file-input-wrapper:hover .file-input-label {
+    background-color: #45a049; /* ホバー時の背景色 */
+}

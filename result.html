@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>協議内容要約</title>
+    <style>
+        ul {
+            list-style-type: none; /* リストスタイルを消す */
+            padding: 0; /* パディングを消す */
+        }
+        li {
+            margin: 5px 0; /* 各リストアイテムの間にスペースを追加 */
+        }
+    </style>
+</head>
+<body>
+    <h1>協議要約</h1>
+    <ul>
+        {% for item in summary_items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">トップページへ戻る</a>
+</body>
+</html>

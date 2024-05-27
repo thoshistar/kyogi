@@ -16,7 +16,7 @@ if os.name == 'nt':
 app = Flask(__name__, template_folder='.')
 
 # OpenAI APIキーを設定
-openai.api_key = os.getenv("sk-proj-3YFqh7qYd8QrXDu1IVQtT3BlbkFJV9D3ctRCixmVjKXQTav7")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # .docxファイルを読み込む関数
 def read_docx(file_path):

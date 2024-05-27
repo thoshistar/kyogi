@@ -1,18 +1,9 @@
 from flask import Flask, render_template, request, redirect
 import os
 import openai
-import ctypes
-import ctypes.util
 import docx
 import whisper
-
-# Windows環境でのlibcの設定
-if os.name == 'nt':
-    libc_name = ctypes.util.find_library("msvcrt")
-    if libc_name:
-        libc = ctypes.CDLL(libc_name)
-    else:
-        raise RuntimeError("Cannot find msvcrt.dll")
+import time
 
 app = Flask(__name__, template_folder='.')
 
@@ -45,9 +36,10 @@ def generate():
     file.save(filepath)
 
     # テキストを取得
+    start_time = time.time()
     if filepath.endswith('.m4a') or filepath.endswith('.mp3') or filepath.endswith('.wav'):
         # Whisperを使って音声ファイルをテキストに変換
-        model = whisper.load_model("base")
+        model = whisper.load_model("tiny")  # 'tiny'モデルを使用して軽量化
         result = model.transcribe(filepath)
         text = result['text']
     elif filepath.endswith('.docx'):
@@ -55,6 +47,8 @@ def generate():
         text = read_docx(filepath)
     else:
         return "Unsupported file format", 400
+    end_time = time.time()
+    print(f"Transcription time: {end_time - start_time} seconds")
 
     # GPT-4で要点整理
     doc_text = read_docx("example/稟議書の記載例.docx")  # 参照用のdocxファイルを読み込む
@@ -63,7 +57,7 @@ def generate():
 """
 
     response = openai.ChatCompletion.create(
-        model="gpt-4o",
+        model="gpt-4",
         messages=[
             {"role": "user", "content": prompt}
         ]
@@ -78,4 +72,4 @@ def generate():
 
 if __name__ == '__main__':
     os.makedirs("uploads", exist_ok=True)
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=True)

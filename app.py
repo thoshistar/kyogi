@@ -13,11 +13,10 @@ if os.name == 'nt':
     else:
         raise RuntimeError("Cannot find msvcrt.dll")
 
-
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
 
 # OpenAI APIキーを設定
-openai.api_key = "sk-proj-Byyp5RNBkE4Owc5ENFmET3BlbkFJsZSy2dutBMgInjZf4gjg"
+openai.api_key = os.getenv("sk-proj-3YFqh7qYd8QrXDu1IVQtT3BlbkFJV9D3ctRCixmVjKXQTav7")
 
 # .docxファイルを読み込む関数
 def read_docx(file_path):
@@ -66,7 +65,7 @@ def generate():
 """
 
     response = openai.ChatCompletion.create(
-        model="gpt-4o",
+        model="gpt-4",
         messages=[
             {"role": "user", "content": prompt}
         ]

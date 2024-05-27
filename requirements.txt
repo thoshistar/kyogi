@@ -1,4 +1,4 @@
 Flask==3.0.3
 openai==0.27.0
-docx==0.2.4
-whisper @ git+https://github.com/openai/whisper.git
+python-docx==0.8.11
+openai-whisper @ git+https://github.com/openai/whisper.git

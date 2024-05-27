@@ -4,6 +4,7 @@ import openai
 import ctypes
 import ctypes.util
 import docx
+import whisper
 
 # Windows環境でのlibcの設定
 if os.name == 'nt':
@@ -15,7 +16,7 @@ if os.name == 'nt':
 
 app = Flask(__name__, template_folder='.')
 
-# OpenAI APIキーを設定
+# OpenAI APIキーを環境変数から取得
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # .docxファイルを読み込む関数
@@ -45,13 +46,10 @@ def generate():
 
     # テキストを取得
     if filepath.endswith('.m4a') or filepath.endswith('.mp3') or filepath.endswith('.wav'):
-        # Whisper-1を使って音声ファイルをテキストに変換
-        with open(filepath, "rb") as audio_file:
-            transcript = openai.Audio.transcribe(
-                model="whisper-1", 
-                file=audio_file
-            )
-        text = transcript['text']
+        # Whisperを使って音声ファイルをテキストに変換
+        model = whisper.load_model("base")
+        result = model.transcribe(filepath)
+        text = result['text']
     elif filepath.endswith('.docx'):
         # .docxファイルを読み込んでテキストを取得
         text = read_docx(filepath)
@@ -65,7 +63,7 @@ def generate():
 """
 
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=[
             {"role": "user", "content": prompt}
         ]

@@ -9,6 +9,22 @@
         /* 追加のスタイル */
         .hidden { display: none; }
         .loading { font-weight: bold; color: red; }
+
+        /* ローディングスピナーのスタイル */
+        .spinner {
+            margin: 20px auto;
+            width: 50px;
+            height: 50px;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-top: 8px solid #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 
@@ -25,6 +41,7 @@
         <br>
     </form>
     <p id="loadingMessage" class="hidden"></p>
+    <div id="spinner" class="spinner hidden"></div>
 
     <script>
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
@@ -41,9 +58,12 @@
             formData.append('file', file);
 
             var loadingMessage = document.getElementById('loadingMessage');
+            var spinner = document.getElementById('spinner');
+
             loadingMessage.textContent = `"${file.name}" ファイル読み込み中です。`;
             loadingMessage.classList.remove('hidden');
             loadingMessage.classList.add('loading');
+            spinner.classList.remove('hidden');
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/generate', true);
@@ -58,6 +78,7 @@
                 }
 
                 loadingMessage.classList.add('hidden');
+                spinner.classList.add('hidden');
             };
 
             xhr.send(formData);

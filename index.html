@@ -1,23 +1,59 @@
-<!doctype html>
-<html lang="ja">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static\index.css" type="text/css">
-    <title>トップページ</title>
+    <title>File Upload</title>
+    <style>
+        /* 簡単なスタイルを追加 */
+        .hidden { display: none; }
+        .loading { font-weight: bold; color: red; }
+    </style>
 </head>
-
 <body>
-    <h1>音声ファイルアップロード画面</h1>
-    <form action="/generate" method="post" enctype="multipart/form-data">
-        <div class="file-input-wrapper">
-            <label for="file" class="file-input-label">ファイルを選択</label>
-            <input type="file" id="file" name="file">
-        </div>
-
-    <br>
-        <input type="submit" value="協議出力" class="custom-button">
-    </br>
+    <h1>ファイルをアップロード</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput">
+        <button type="submit">アップロード</button>
     </form>
+    <p id="loadingMessage" class="hidden"></p>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+            if (!file) {
+                alert("ファイルを選択してください。");
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('file', file);
+
+            var loadingMessage = document.getElementById('loadingMessage');
+            loadingMessage.textContent = `"${file.name}" ファイル読み込み中です。`;
+            loadingMessage.classList.remove('hidden');
+            loadingMessage.classList.add('loading');
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/generate', true);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.open();
+                    document.write(xhr.responseText);
+                    document.close();
+                } else {
+                    alert("ファイルのアップロード中にエラーが発生しました。");
+                }
+
+                loadingMessage.classList.add('hidden');
+            };
+
+            xhr.send(formData);
+        });
+    </script>
 </body>
 </html>

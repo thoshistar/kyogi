@@ -39,40 +39,22 @@ form {
 /* ファイル入力のスタイル */
 .file-input-wrapper {
     position: relative;
-    margin-bottom: 20px;
+    width: 100%; /* 幅を広げる */
 }
 
 .file-input-label {
     display: block;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-input[type="file"] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.file-input-wrapper::before {
-    content: 'ファイルを選択';
-    display: inline-block;
     background: #007BFF;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%; /* 幅を広げる */
     text-align: center;
+    width: 100%; /* 幅を広げる */
 }
 
-input[type="file"]:focus + .file-input-wrapper::before,
-input[type="file"]:hover + .file-input-wrapper::before {
-    background: #0056b3;
+input[type="file"] {
+    display: none;
 }
 
 #fileName {
@@ -91,6 +73,7 @@ input[type="file"]:hover + .file-input-wrapper::before {
     font-size: 1em;
     width: 100%; /* 幅を広げる */
     text-align: center;
+    margin-top: 10px;
 }
 
 .custom-button:hover {

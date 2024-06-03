@@ -5,45 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/index.css" type="text/css">
     <title>トップページ</title>
-    <style>
-        /* 追加のスタイル */
-        .hidden { display: none; }
-        .loading { font-weight: bold; color: red; }
-
-        /* ローディングスピナーのスタイル */
-        .spinner {
-            margin: 20px auto;
-            width: 50px;
-            height: 50px;
-            border: 8px solid rgba(0, 0, 0, 0.1);
-            border-top: 8px solid #000;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 </head>
-
 <body>
     <h1>音声ファイルアップロード画面</h1>
     <form id="uploadForm" enctype="multipart/form-data">
         <div class="file-input-wrapper">
             <label for="file" class="file-input-label">ファイルを選択</label>
             <input type="file" id="file" name="file">
+            <p id="fileName"></p>
         </div>
-
         <br>
-            <input type="submit" value="協議出力" class="custom-button">
+        <input type="submit" value="協議出力" class="custom-button">
         <br>
     </form>
     <p id="loadingMessage" class="hidden"></p>
     <div id="spinner" class="spinner hidden"></div>
 
     <script>
+        document.getElementById('file').addEventListener('change', function(event) {
+            var fileInput = event.target;
+            var fileName = document.getElementById('fileName');
+            if (fileInput.files.length > 0) {
+                fileName.textContent = "選択されたファイル: " + fileInput.files[0].name;
+            } else {
+                fileName.textContent = "";
+            }
+        });
+
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
             event.preventDefault();
 

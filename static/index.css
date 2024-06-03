@@ -33,10 +33,12 @@ form {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px; /* 幅を広げる */
 }
 
 /* ファイル入力のスタイル */
 .file-input-wrapper {
+    position: relative;
     margin-bottom: 20px;
 }
 
@@ -47,7 +49,13 @@ form {
 }
 
 input[type="file"] {
-    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
 }
 
 .file-input-wrapper::before {
@@ -58,11 +66,18 @@ input[type="file"] {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%; /* 幅を広げる */
+    text-align: center;
 }
 
 input[type="file"]:focus + .file-input-wrapper::before,
 input[type="file"]:hover + .file-input-wrapper::before {
     background: #0056b3;
+}
+
+#fileName {
+    margin-top: 10px;
+    color: #333;
 }
 
 /* ボタンのスタイル */
@@ -74,6 +89,8 @@ input[type="file"]:hover + .file-input-wrapper::before {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
+    width: 100%; /* 幅を広げる */
+    text-align: center;
 }
 
 .custom-button:hover {

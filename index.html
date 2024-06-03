@@ -1,37 +1,32 @@
-<!doctype html> 
+<!doctype html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/index.css" type="text/css">
     <title>トップページ</title>
+    <style>
+        /* 追加のスタイル */
+        .hidden { display: none; }
+        .loading { font-weight: bold; color: red; }
+    </style>
 </head>
+
 <body>
     <h1>音声ファイルアップロード画面</h1>
     <form id="uploadForm" enctype="multipart/form-data">
         <div class="file-input-wrapper">
             <label for="file" class="file-input-label">ファイルを選択</label>
             <input type="file" id="file" name="file">
-            <p id="fileName"></p>
         </div>
+
         <br>
-        <input type="submit" value="協議出力" class="custom-button">
+            <input type="submit" value="協議出力" class="custom-button">
         <br>
     </form>
     <p id="loadingMessage" class="hidden"></p>
-    <div id="spinner" class="spinner hidden"></div>
 
     <script>
-        document.getElementById('file').addEventListener('change', function(event) {
-            var fileInput = event.target;
-            var fileName = document.getElementById('fileName');
-            if (fileInput.files.length > 0) {
-                fileName.textContent = "選択されたファイル: " + fileInput.files[0].name;
-            } else {
-                fileName.textContent = "";
-            }
-        });
-
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -46,12 +41,9 @@
             formData.append('file', file);
 
             var loadingMessage = document.getElementById('loadingMessage');
-            var spinner = document.getElementById('spinner');
-
             loadingMessage.textContent = `"${file.name}" ファイル読み込み中です。`;
             loadingMessage.classList.remove('hidden');
             loadingMessage.classList.add('loading');
-            spinner.classList.remove('hidden');
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/generate', true);
@@ -66,7 +58,6 @@
                 }
 
                 loadingMessage.classList.add('hidden');
-                spinner.classList.add('hidden');
             };
 
             xhr.send(formData);

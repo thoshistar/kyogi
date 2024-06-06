@@ -20,6 +20,7 @@
             <label for="file" class="file-input-label">ファイルを選択</label>
             <input type="file" id="file" name="file">
         </div>
+        <p id="fileName" class="hidden"></p>
         <br>
         <input type="submit" value="協議出力" class="custom-button">
         <br>
@@ -28,6 +29,18 @@
     <div class="spinner" id="loadingSpinner"></div>
 
     <script>
+        document.getElementById('file').addEventListener('change', function(event) {
+            var fileInput = event.target;
+            var fileNameDisplay = document.getElementById('fileName');
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = `選択されたファイル: ${fileInput.files[0].name}`;
+                fileNameDisplay.classList.remove('hidden');
+            } else {
+                fileNameDisplay.textContent = '';
+                fileNameDisplay.classList.add('hidden');
+            }
+        });
+
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
             event.preventDefault();
 

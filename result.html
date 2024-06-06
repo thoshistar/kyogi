@@ -5,22 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>協議内容要約</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #007BFF;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
+        }
         ul {
-            list-style-type: none; /* リストスタイルを消す */
-            padding: 0; /* パディングを消す */
+            list-style-type: none;
+            padding: 0;
         }
         li {
-            margin: 5px 0; /* 各リストアイテムの間にスペースを追加 */
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #007BFF;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007BFF;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h1>協議要約</h1>
-    <ul>
-        {% for item in summary_items %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-    <a href="/">トップページへ戻る</a>
+    <div class="container">
+        <h1>協議要約</h1>
+        <ul>
+            {% for item in summary_items %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/">トップページへ戻る</a>
+    </div>
 </body>
 </html>

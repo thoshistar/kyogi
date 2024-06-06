@@ -89,6 +89,7 @@ input[type="file"] {
 .loading {
     font-weight: bold;
     color: red;
+    margin-top: 20px; /* 文言とボタンの間に余白を追加 */
 }
 
 /* ローディングスピナーのスタイル */

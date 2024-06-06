@@ -60,6 +60,7 @@ input[type="file"] {
 #fileName {
     margin-top: 10px;
     color: #333;
+    font-size: 1em;
 }
 
 /* ボタンのスタイル */

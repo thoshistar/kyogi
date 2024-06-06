@@ -33,7 +33,7 @@
             var fileInput = event.target;
             var fileNameDisplay = document.getElementById('fileName');
             if (fileInput.files.length > 0) {
-                fileNameDisplay.textContent = `ファイル: ${fileInput.files[0].name}`;
+                fileNameDisplay.textContent = `${fileInput.files[0].name}`;
                 fileNameDisplay.classList.remove('hidden');
             } else {
                 fileNameDisplay.textContent = '';

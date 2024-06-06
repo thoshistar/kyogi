@@ -74,7 +74,7 @@ input[type="file"] {
     font-size: 1em;
     width: 100%; /* 幅を広げる */
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px; /* 文言とボタンの間に余白を追加 */
 }
 
 .custom-button:hover {
@@ -89,7 +89,7 @@ input[type="file"] {
 .loading {
     font-weight: bold;
     color: red;
-    margin-top: 20px; /* 文言とボタンの間に余白を追加 */
+    margin-top: 20px;
 }
 
 /* ローディングスピナーのスタイル */

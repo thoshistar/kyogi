@@ -62,28 +62,12 @@
 <body>
     <div class="container">
         <h1>協議要約</h1>
-        <ul id="summary-list">
-            <!-- JavaScriptでリストアイテムを生成 -->
+        <ul>
+            {% for item in summary_items %}
+                <li>{{ item }}</li>
+            {% endfor %}
         </ul>
         <a href="/">トップページへ戻る</a>
     </div>
-
-    <script>
-        const summaryItems = [
-            "## 協議内容1",
-            "## 協議内容2",
-            "## 協議内容3"
-        ];
-
-        const summaryList = document.getElementById('summary-list');
-
-        summaryItems.forEach((item, index) => {
-            const li = document.createElement('li');
-            li.textContent = item.replace(/^##\s*/, ''); // ##を削除
-            li.style.borderLeft = (index % 2 === 0) ? '5px solid #007BFF' : '5px solid #28a745';
-            li.style.backgroundColor = (index % 2 === 0) ? '#eef5ff' : '#f2fff0';
-            summaryList.appendChild(li);
-        });
-    </script>
 </body>
 </html>
